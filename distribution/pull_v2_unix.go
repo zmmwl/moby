@@ -9,10 +9,13 @@ import (
 	"github.com/docker/distribution/context"
 	"github.com/docker/distribution/manifest/manifestlist"
 	"github.com/sirupsen/logrus"
+	"fmt"
+	"reflect"
 )
 
 func (ld *v2LayerDescriptor) open(ctx context.Context) (distribution.ReadSeekCloser, error) {
 	blobs := ld.repo.Blobs(ctx)
+	fmt.Println("mmzhou said [pull_v2_unix.go-line:17] ",reflect.TypeOf(blobs))
 	return blobs.Open(ctx, ld.digest)
 }
 

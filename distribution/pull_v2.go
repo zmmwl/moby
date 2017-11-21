@@ -33,6 +33,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
+	//"reflect"
 )
 
 var (
@@ -229,7 +230,10 @@ func (ld *v2LayerDescriptor) Download(ctx context.Context, progressOutput progre
 			return nil, 0, err
 		}
 	}
-
+	//fmt.Println("mmzhou said [pull_v2-line:232] before downloading...")
+	//ld.repoInfo is *registry.RepositoryInfo
+	//fmt.Println("mmzhou said [pull_v2-line:233] ",reflect.TypeOf(ld.repo))
+	//ld.repo is *client.repository
 	reader := progress.NewProgressReader(ioutils.NewCancelReadCloser(ctx, layerDownload), progressOutput, size-offset, ld.ID(), "Downloading")
 	defer reader.Close()
 

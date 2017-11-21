@@ -168,7 +168,7 @@ func (hrs *httpReadSeeker) reader() (io.Reader, error) {
 	if hrs.rc != nil {
 		return hrs.rc, nil
 	}
-
+	fmt.Println("mmzhou said [http_reader.go-line:171] hrs.url is",hrs.url)
 	req, err := http.NewRequest("GET", hrs.url, nil)
 	if err != nil {
 		return nil, err
@@ -189,6 +189,7 @@ func (hrs *httpReadSeeker) reader() (io.Reader, error) {
 
 	// Normally would use client.SuccessStatus, but that would be a cyclic
 	// import
+	fmt.Println("mmzhou said [http_reader.go-line:192] resp.StatusCode is",resp.StatusCode)
 	if resp.StatusCode >= 200 && resp.StatusCode <= 399 {
 		if hrs.readerOffset > 0 {
 			if resp.StatusCode != http.StatusPartialContent {
@@ -246,6 +247,6 @@ func (hrs *httpReadSeeker) reader() (io.Reader, error) {
 		}
 		return nil, fmt.Errorf("unexpected status resolving reader: %v", resp.Status)
 	}
-
+	fmt.Println("mmzhou said [http_reader.go-line:250] hrs.rc is",hrs.rc)
 	return hrs.rc, nil
 }

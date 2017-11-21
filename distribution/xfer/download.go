@@ -155,6 +155,7 @@ func (ldm *LayerDownloadManager) Download(ctx context.Context, initialRootFS ima
 
 		// Layer is not known to exist - download and register it.
 		progress.Update(progressOutput, descriptor.ID(), "Pulling fs layer")
+		fmt.Print("mmzhou said hello2")
 
 		var xferFunc DoFunc
 		if topDownload != nil {
@@ -263,6 +264,7 @@ func (ldm *LayerDownloadManager) makeDownloadFunc(descriptor DownloadDescriptor,
 			defer descriptor.Close()
 
 			for {
+				// mmzhou said: descriptor is distribution.v2LayerDescriptor
 				downloadReader, size, err = descriptor.Download(d.Transfer.Context(), progressOutput)
 				if err == nil {
 					break

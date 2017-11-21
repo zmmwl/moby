@@ -452,7 +452,7 @@ func (ms *manifests) Get(ctx context.Context, dgst digest.Digest, options ...dis
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Print("mmzhou said [repository.go-line:455] manifestURL is: ", u)
 	req, err := http.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, err
@@ -642,9 +642,11 @@ func (bs *blobs) Open(ctx context.Context, dgst digest.Digest) (distribution.Rea
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("mmzhou said [repository-line:645] blobURL is: ",blobURL)
 
 	return transport.NewHTTPReadSeeker(bs.client, blobURL,
 		func(resp *http.Response) error {
+			fmt.Println("mmzhou said [repository-line:649] resp.StatusCode is: ",resp.StatusCode)
 			if resp.StatusCode == http.StatusNotFound {
 				return distribution.ErrBlobUnknown
 			}
