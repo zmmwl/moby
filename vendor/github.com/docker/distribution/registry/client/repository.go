@@ -720,6 +720,7 @@ func (bs *blobs) Create(ctx context.Context, options ...distribution.BlobCreateO
 	}
 
 	u, err := bs.ub.BuildBlobUploadURL(bs.name, values...)
+	fmt.Println("mmzhou said [repository-line:723] Create() blobURL is: ",u)
 	if err != nil {
 		return nil, err
 	}
