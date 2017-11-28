@@ -26,7 +26,7 @@ import (
 	"github.com/docker/docker/registry"
 	digest "github.com/opencontainers/go-digest"
 	"github.com/sirupsen/logrus"
-	"reflect"
+	//"reflect"
 )
 
 const (
