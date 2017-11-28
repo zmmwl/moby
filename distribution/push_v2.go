@@ -26,6 +26,7 @@ import (
 	"github.com/docker/docker/registry"
 	digest "github.com/opencontainers/go-digest"
 	"github.com/sirupsen/logrus"
+	"reflect"
 )
 
 const (
@@ -300,7 +301,7 @@ func (pd *v2PushDescriptor) Upload(ctx context.Context, progressOutput progress.
 	bs := pd.repo.Blobs(ctx)
 
 	var layerUpload distribution.BlobWriter
-
+	fmt.Println("mmzhou said [push_v2.go-line:304] layerUpload is:",layerUpload)
 	// Attempt to find another repository in the same registry to mount the layer from to avoid an unnecessary upload
 	candidates := getRepositoryMountCandidates(pd.repoInfo, pd.hmacKey, maxMountAttempts, v2Metadata)
 	for _, mountCandidate := range candidates {
@@ -334,6 +335,8 @@ func (pd *v2PushDescriptor) Upload(ctx context.Context, progressOutput progress.
 
 		// send the layer
 		lu, err := bs.Create(ctx, createOpts...)
+		fmt.Println("mmzhou said [push_v2.go-line:338] lu is:",lu)
+		fmt.Println("mmzhou said [push_v2.go-line:339] err is:",err)
 		switch err := err.(type) {
 		case nil:
 			// noop
@@ -384,7 +387,7 @@ func (pd *v2PushDescriptor) Upload(ctx context.Context, progressOutput progress.
 			return descriptor, err
 		}
 	}
-
+	fmt.Println("mmzhou said [push_v2.go-line:390] layerUpload is:",layerUpload)
 	logrus.Debugf("Pushing layer: %s", diffID)
 	if layerUpload == nil {
 		layerUpload, err = bs.Create(ctx)
