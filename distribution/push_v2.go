@@ -396,7 +396,7 @@ func (pd *v2PushDescriptor) Upload(ctx context.Context, progressOutput progress.
 		}
 	}
 	defer layerUpload.Close()
-
+	fmt.Println("mmzhou said [push_v2.go-line:399] layerUpload is:",layerUpload)
 	// upload the blob
 	return pd.uploadUsingSession(ctx, progressOutput, diffID, layerUpload)
 }
@@ -425,7 +425,7 @@ func (pd *v2PushDescriptor) uploadUsingSession(
 	size, _ := pd.layer.Size()
 
 	reader = progress.NewProgressReader(ioutils.NewCancelReadCloser(ctx, contentReader), progressOutput, size, pd.ID(), "Pushing")
-
+	fmt.Println("mmzhou said [push_v2.go-line:428] pd.layer.MediaType() is:",pd.layer.MediaType())
 	switch m := pd.layer.MediaType(); m {
 	case schema2.MediaTypeUncompressedLayer:
 		compressedReader, compressionDone := compress(reader)
