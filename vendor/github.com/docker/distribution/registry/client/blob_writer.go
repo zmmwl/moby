@@ -36,6 +36,8 @@ func (hbu *httpBlobUpload) handleErrorResponse(resp *http.Response) error {
 }
 
 func (hbu *httpBlobUpload) ReadFrom(r io.Reader) (n int64, err error) {
+	fmt.Println("mmzhou said [blob_writer.go-line:39] hbu.location is:",hbu.location)
+	fmt.Println("mmzhou said [blob_writer.go-line:40] hbu.uuid is:",hbu.uuid)
 	req, err := http.NewRequest("PATCH", hbu.location, ioutil.NopCloser(r))
 	if err != nil {
 		return 0, err
@@ -56,6 +58,8 @@ func (hbu *httpBlobUpload) ReadFrom(r io.Reader) (n int64, err error) {
 	if err != nil {
 		return 0, err
 	}
+	fmt.Println("mmzhou said [blob_writer.go-line:61] hbu.location is:",hbu.location)
+	fmt.Println("mmzhou said [blob_writer.go-line:62] hbu.uuid is:",hbu.uuid)
 	rng := resp.Header.Get("Range")
 	var start, end int64
 	if n, err := fmt.Sscanf(rng, "%d-%d", &start, &end); err != nil {
