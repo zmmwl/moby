@@ -9,6 +9,7 @@ import (
 	"github.com/docker/docker/pkg/progress"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
+	"fmt"
 )
 
 const maxUploadAttempts = 5
@@ -69,7 +70,7 @@ func (lum *LayerUploadManager) Upload(ctx context.Context, layers []UploadDescri
 		uploads          []*uploadTransfer
 		dedupDescriptors = make(map[string]*uploadTransfer)
 	)
-
+	fmt.Println("mmzhou said [upload.go-line:73] before upload layers:",len(layers))
 	for _, descriptor := range layers {
 		progress.Update(progressOutput, descriptor.ID(), "Preparing")
 

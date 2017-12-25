@@ -730,7 +730,7 @@ func (bs *blobs) Create(ctx context.Context, options ...distribution.BlobCreateO
 		return nil, err
 	}
 	defer resp.Body.Close()
-
+	fmt.Println("mmzhou said [repository-line:733] resp.StatusCode is: ",resp.StatusCode)
 	switch resp.StatusCode {
 	case http.StatusCreated:
 		desc, err := bs.statter.Stat(ctx, opts.Mount.From.Digest())

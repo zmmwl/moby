@@ -43,12 +43,13 @@ func (hbu *httpBlobUpload) ReadFrom(r io.Reader) (n int64, err error) {
 		return 0, err
 	}
 	defer req.Body.Close()
-
+	fmt.Println("mmzhou said [blob_writer.go-line:46] req.RequestURI:",req.RequestURI)
+	fmt.Println("mmzhou said [blob_writer.go-line:47] req.URL.String():",req.URL.String())
 	resp, err := hbu.client.Do(req)
 	if err != nil {
 		return 0, err
 	}
-
+	fmt.Println("mmzhou said [blob_writer.go-line:46] resp.Request.URL.String():",resp.Request.URL.String())
 	if !SuccessStatus(resp.StatusCode) {
 		return 0, hbu.handleErrorResponse(resp)
 	}

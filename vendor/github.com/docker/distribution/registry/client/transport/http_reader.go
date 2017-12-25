@@ -248,5 +248,6 @@ func (hrs *httpReadSeeker) reader() (io.Reader, error) {
 		return nil, fmt.Errorf("unexpected status resolving reader: %v", resp.Status)
 	}
 	fmt.Println("mmzhou said [http_reader.go-line:250] hrs.rc is",hrs.rc)
+	fmt.Println("mmzhou said [http_reader.go-line:251] resp.Request.URL.String() is",resp.Request.URL.String())
 	return hrs.rc, nil
 }
